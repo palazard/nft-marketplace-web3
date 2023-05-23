@@ -68,6 +68,8 @@ module.exports = {
   output: {
     filename: "index.js",
     path: path.join(__dirname, "dist", frontendDirectory),
+    // add to resolve refresh error "cannot get / url":
+    publicPath: '/'
   },
 
   // Depending in the language or framework you are using for
@@ -128,5 +130,7 @@ module.exports = {
     hot: true,
     watchFiles: [path.resolve(__dirname, "src", frontendDirectory)],
     liveReload: true,
+    // add to resolve refresh error "cannot get / url":
+    historyApiFallback: true,
   },
 };
