@@ -7,12 +7,13 @@ BONUS : Claim your free 10000 DLOOM tokens from the [dreamsloom-tokens-app](http
 
 
 ## Here the steps:
-1. Mint your NFTs from the Minter Page
+1. Mint your NFTs from the Minter Page 
 2. All your NFTs will be visible form the MyNFTs Page
    From there you can put on sale NFT by clicking the Sell button and define your price in DBLOOM Tokens
 3. From the Discover Page you can see all the actual NFTs on sale, and buy them with yours [DBLOOM Tokens](https://github.com/palazard/dreamsloom-tokens-app)
 
 Fork the project and test in on your local ICP!
+You can find NFT to mint in the folder "CryptoDunks".
 
 
 ## Technologies
@@ -73,62 +74,7 @@ dfx deploy --argument='("CryptoDunks #123", principal "m3ku4-zhrde-bfwli-xix4y-g
 
 http://localhost:8080/
 
-# Minter Else HTML
 
-```
- <div className="minter-container">
-        <h3 className="Typography-root makeStyles-title-99 Typography-h3 form-Typography-gutterBottom">
-          Minted!
-        </h3>
-        <div className="horizontal-center">
-        </div>
-      </div>
-
-```
-
-# Loader HTML
-
-```
-<div className="lds-ellipsis">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-```
-
-# Button HTML
-
-```
-<div className="Chip-root makeStyles-chipBlue-108 Chip-clickable">
-            <span
-              onClick={}
-              className="form-Chip-label"
-            >
-              Sell
-            </span>
-            </div>
-```
-
-# Price Input HTML
-
-```
-<input
-        placeholder="Price in DANG"
-        type="number"
-        className="price-input"
-        value={}
-        onChange={}
-      />
-```
-
-# Price Label HTML
-
-```
-<div className="disButtonBase-root disChip-root makeStyles-price-23 disChip-outlined">
-          <span className="disChip-label">23 DANG</span>
-        </div>
-```
 
 # Creating NFT for Testing
 
@@ -162,8 +108,8 @@ dfx canister call qvhpv-4qaaa-aaaaa-aaagq-cai transferOwnership '(principal "ryj
 
 1. Copy over the token declarations folder
 
-2. Set the token canister id into the <REPLACE WITH TOKEN CANISTER ID>
+2. Set the token canister id in Item.jsx (l.138) into the <REPLACE WITH TOKEN CANISTER ID>
 
 ```
-const dangPrincipal = Principal.fromText("<REPLACE WITH TOKEN CANISTER ID>");
+canisterId: Principal.fromText("<REPLACE WITH TOKEN CANISTER ID>");
 ```
