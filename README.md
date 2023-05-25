@@ -1,3 +1,37 @@
+
+# WELCOME TO DECENTRALIZED NFT MARKETPLACE!!
+
+Mint, sell & buy NFTs on this decentralized marketplace on Internet Computer.
+
+BONUS : Claim your free 10000 DLOOM tokens from the [dreamsloom-tokens-app](https://github.com/palazard/dreamsloom-tokens-app), so you can buy the NFTs you like!
+
+
+## Here the steps:
+1. Mint your NFTs from the Minter Page
+2. All your NFTs will be visible form the MyNFTs Page
+   From there you can put on sale NFT by clicking the Sell button and define your price in DBLOOM Tokens
+3. From the Discover Page you can see all the actual NFTs on sale, and buy them with yours [DBLOOM Tokens](https://github.com/palazard/dreamsloom-tokens-app)
+
+Fork the project and test in on your local ICP!
+
+
+## Technologies
+### Frontend
+This project was bootstrapped with React.js.
+Routing with React Router (react-router-dom).
+
+### Backend
+Motoko for ICP
+
+
+### Feature in developpement
+Authentication with Internet Identity
+
+
+
+----------------------------------------------------------------
+# GUIDE
+
 Copyright 2022 London App Brewery LTD (www.appbrewery.com)
 
 The code in this tutorial project is licended under the Apache License, Version 2.0 (the "License");
@@ -108,7 +142,7 @@ dfx canister call opend mint '(vec {137; 80; 78; 71; 13; 10; 26; 10; 0; 0; 0; 13
 
 ```
 dfx canister call opend listItem '(principal "<REPLACE WITH NFT CANISTER ID>", 2)'
-dfx canister call opend listItem '(principal "rno2w-sqaaa-aaaaa-aaacq-cai", 2)'
+dfx canister call opend listItem '(principal "qvhpv-4qaaa-aaaaa-aaagq-cai", 2)'
 ```
 
 3. Get OpenD canister ID:
@@ -121,7 +155,7 @@ dfx canister id opend
 
 ```
 dfx canister call <REPLACE WITH NFT CANISTER ID> transferOwnership '(principal "<REPLACE WITH OPEND CANISTER ID>", true)'
-dfx canister call rno2w-sqaaa-aaaaa-aaacq-cai transferOwnership '(principal "ryjl3-tyaaa-aaaaa-aaaba-cai", true)'
+dfx canister call qvhpv-4qaaa-aaaaa-aaagq-cai transferOwnership '(principal "ryjl3-tyaaa-aaaaa-aaaba-cai", true)'
 ```
 
 # Conneting to the Token Canister
