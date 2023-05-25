@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import {Principal} from '@dfinity/principal'
 import { idlFactory } from "../../../declarations/nft";
+import { idlFactory as tokenIdlFactory } from "../../../declarations/token";
 import {Actor, HttpAgent} from "@dfinity/agent"
 import Button from "./Button";
 import {opend} from "../../../declarations/opend";
 import {useLocation} from "react-router-dom";
 import CURRENT_USER_ID from "../index";
 import PriceLabel from "./PriceLabel";
+import { token } from "../../../declarations/token/index";
 
 function Item(props) {
 
@@ -22,6 +24,7 @@ function Item(props) {
   const [isHiddenButton, setIsHiddenButton]= useState(true);  //8
   const [isHiddenSpan, setIsHiddenSpan]= useState(true);  //9
   const [priceLabel, setPriceLabel] = useState(); //10
+  const [shouldDisplay, setShouldDisplay] = useState(true);
   // const [isDisabled, setDisabled] = useState(false);
 
 
@@ -129,10 +132,29 @@ function Item(props) {
 
   async function handleBuy(){
     console.log("buying");
+    setIsHiddenLoader(false);
+    const tokenActor = await Actor.createActor(tokenIdlFactory, {
+      agent,
+      canisterId: Principal.fromText("rrkah-fqaaa-aaaaa-aaaaq-cai"),
+    });
+
+    const sellerID= await opend.getOriginalOwner(NFTId);
+    const itemPrice = await opend.getListedNFTPrice(NFTId);
+
+    const result = await tokenActor.transferTo(sellerID, itemPrice);
+    console.log(result);
+
+    if (result === "Success"){
+      const completePurchaseResult = opend.completePurchase(NFTId, sellerID, CURRENT_USER_ID);
+      console.log("Purchase:", completePurchaseResult);
+      setIsHiddenLoader(true);
+      setShouldDisplay(false);
+    }
+
   };
 
   return (
-    <div className="disGrid-item">
+    <div style={{display: shouldDisplay ? "inline" : "none"}} className="disGrid-item">
       <div className="disPaper-root disCard-root makeStyles-root-17 disPaper-elevation1 disPaper-rounded">
         <img
           className="disCardMedia-root makeStyles-image-19 disCardMedia-media disCardMedia-img"

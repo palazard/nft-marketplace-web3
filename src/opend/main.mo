@@ -7,6 +7,7 @@ import List "mo:base/List";
 import Hash "mo:base/Hash";
 import Iter "mo:base/Iter";
 import Array "mo:base/Array";
+import Bool "mo:base/Bool";
 
 actor openD {
 
@@ -111,6 +112,37 @@ actor openD {
             case (?result) result;
         };
          return NTFItem.itemPrice;
+    };
+
+    public shared(msg) func completePurchase(NFTId: Principal, ownerId: Principal, newOwnerId: Principal): async Text {
+        var purchasedNFT : NFTActorClass.NFT = switch(mapOfNFTs.get(NFTId)){
+            case null return "This NFT doesn't exist";
+            case (?result) result;
+        };
+
+        let transferResult = await purchasedNFT.transferOwnership(newOwnerId);
+
+        if (transferResult == "Success"){
+
+            mapOfListing.delete(NFTId);
+
+            var ownedNFTs : List.List<Principal> = switch(mapOfOwners.get(ownerId)){
+            case null List.nil<Principal>();
+            case (?result) result;
+            };
+
+            ownedNFTs :=  List.filter(ownedNFTs, func (listItem : Principal) : Bool {listItem==NFTId});
+            // mapOfOwners.put(ownerId, ownedNFTs); //useless beacause we already update the list, so the hasmap is actualized too.
+
+            addToMapOfOwners(newOwnerId, NFTId);
+
+            return "Success"
+
+        } else {
+
+            return transferResult;
+        }    
+
     };
 
 };
